@@ -65,15 +65,17 @@ async def test_login(client: TestClient):
 async def test_get_current_user(client: TestClient):
     user_data = await create_and_login_user(client)
 
-    headers = {
-        "Authorization": f"Bearer {user_data['access_token']}"
-    }
+    headers = {"Authorization": f"Bearer {user_data['access_token']}"}
 
     url = get_url("/me")
     response = await client.get(path=url, headers=headers)
+    second_response = await client.get(path=url, headers=headers)
 
     assert response.status_code == 200
     assert response.json()["id"] == user_data["user"]["id"]
+
+    assert second_response.status_code == 200
+    assert second_response.json()["id"] == user_data["user"]["id"]
 
 
 @pytest.mark.asyncio

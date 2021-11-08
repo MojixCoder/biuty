@@ -113,4 +113,4 @@ async def refresh(refresh_token: str = Body(..., embed=True)):
     },
 )
 async def me(user: User = Depends(get_current_active_user)):
-    return dict(user)
+    return user

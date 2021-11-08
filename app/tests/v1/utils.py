@@ -4,9 +4,6 @@ from typing import Dict, Any
 
 from async_asgi_testclient import TestClient
 
-from app.main import app
-from app.db.redis import redis, load_val
-
 
 def random_string(k: int = 8) -> str:
     return "".join(random.choices(string.ascii_letters, k=k))
