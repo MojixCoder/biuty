@@ -5,9 +5,6 @@ import ormar
 from app.core.settings import get_settings
 
 
-print(get_settings().DATABASE_URL)
-
-
 metadata = sqlalchemy.MetaData()
 database = databases.Database(get_settings().DATABASE_URL)
 

@@ -81,7 +81,7 @@ async def login(login_data: OAuth2PasswordRequestForm = Depends()):
             },
             "description": "Invalid refresh token.",
         }
-    }
+    },
 )
 async def refresh(refresh_token: str = Body(..., embed=True)):
     tokens = jwt_manager.create_token_from_refresh(refresh_token)
@@ -108,8 +108,8 @@ async def refresh(refresh_token: str = Body(..., embed=True)):
                 }
             },
             "description": "User is not active",
-        }
-    }
+        },
+    },
 )
 async def me(user: User = Depends(get_current_active_user)):
     return dict(user)

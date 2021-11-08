@@ -22,7 +22,7 @@ class UserSchema(BaseModel):
     name: str
     is_active: bool
     store_count: int
-    date_joined: datetime
+    joined_at: datetime
 
     class Config:
         orm_mode = True
@@ -84,5 +84,6 @@ class RefreshSchema(BaseModel):
     """
     Refresh schema
     """
+
     access_token: str
     token_type: str

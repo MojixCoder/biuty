@@ -22,7 +22,7 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-from app.models import user, core  # noqa
+from app.models import user, core, store  # noqa
 
 target_metadata = metadata
 
