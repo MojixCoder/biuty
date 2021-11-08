@@ -5,7 +5,7 @@ import sqlalchemy
 from async_asgi_testclient import TestClient
 
 from app.main import app
-from app.db.sql import metadata
+from app.db.sql import metadata, test_database
 from app.core.settings import get_settings
 
 
@@ -26,3 +26,10 @@ def create_test_database():
 async def client():
     async with TestClient(app) as client:
         yield client
+
+
+@pytest.fixture(scope="module", autouse=True)
+async def connect_to_test_database():
+    await test_database.connect()
+    yield
+    await test_database.disconnect()

@@ -2,12 +2,11 @@ from typing import List
 
 from fastapi import APIRouter, Path
 
-from app.core.settings import get_settings
+from app.core.exceptions import NOT_FOUND
 from app.models.core import Province, City
 from app.schemas.core import ProvinceSchema, CitySchema
 
 
-settings = get_settings()
 router = APIRouter(prefix="/core", tags=["core"])
 
 
@@ -36,7 +35,7 @@ async def get_provinces():
 async def get_province_cities(province_id: int = Path(..., gt=0)):
     province_exists = await Province.objects.filter(id=province_id).exists()
     if not province_exists:
-        raise settings.NOT_FOUND
+        raise NOT_FOUND
     cities = (
         await City.objects.filter(province=province_id).select_related("province").all()
     )
