@@ -56,7 +56,8 @@ async def sign_up(user_data: SignUpSchema):
     },
 )
 async def login(login_data: OAuth2PasswordRequestForm = Depends()):
-    user = await User.objects.get_or_none(username=login_data.username)
+    username = login_data.username.lower()
+    user = await User.objects.get_or_none(username=username)
     if user is None:
         raise BAD_REQUEST
     is_correct_password = verify_password(

@@ -8,8 +8,7 @@ from app.db.sql import BaseMeta
 
 class Role(IntEnum):
     admin = 1
-    store = 2
-    user = 3
+    user = 2
 
 
 class User(ormar.Model):

@@ -30,11 +30,11 @@ class Settings(BaseSettings):
     JWT_ACCESS_EXPIRE_TIME: timedelta = timedelta(days=1)
 
     # Regex
-    USERNAME_REGEX: str = "(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])"
-    PASSWORD_REGEX: str = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
-    PHONE_NUMBER_REGEX: str = "^[0][9][0-9]{9}$"
+    USERNAME_REGEX: str = r"(?=.{4,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])"
+    PASSWORD_REGEX: str = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+    PHONE_NUMBER_REGEX: str = r"^[0][9][0-9]{9}$"
     INSTAGRAM_REGEX: str = (
-        "([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
+        r"([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
     )
 
     # Cache keys
