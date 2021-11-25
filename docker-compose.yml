@@ -23,11 +23,12 @@ services:
       - 9000:9000
     environment:
       - DEBUG=True
+      - TEST=False
       - SECRET_KEY=4981e57711ba3cc14bfaee9d7a8b2db4bafeed58d13a7a7aaaf873ba1e4a2ab1
       - DATABASE_URL=postgresql://postgres:pawndarby@pgsql/biuty
       - TEST_DATABASE_URL=postgresql://postgres:pawndarby@pgsql/biuty_test
       - REDIS_HOST=redis://redis
-      - REDIS_DB=1
+      - REDIS_DB=2
     depends_on:
       - pgsql
       - redis

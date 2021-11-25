@@ -88,6 +88,7 @@ fabric.properties
 
 # Sonarlint plugin
 # https://plugins.jetbrains.com/plugin/7973-sonarlint
+.pytest_cache
 .idea
 .idea/**/sonarlint/
 

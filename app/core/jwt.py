@@ -1,14 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Dict, Any
 
-from fastapi import HTTPException, status
 import jwt
 
-from app.core.settings import get_settings
+from app.core.settings import settings
 from app.core.exceptions import BAD_REQUEST
-
-
-settings = get_settings()
 
 
 class MojixJWT:
@@ -20,7 +16,7 @@ class MojixJWT:
     def __init__(
         self,
         secret: str,
-        algorithm: str = "HS512",
+        algorithm: str = "HS256",
         access_expire_time: timedelta = timedelta(seconds=3600),
         refresh_expire_time: timedelta = timedelta(seconds=86400),
         user_id_claim: str = "sub",
@@ -167,4 +163,5 @@ jwt_manager = MojixJWT(
     secret=settings.SECRET_KEY,
     access_expire_time=settings.JWT_ACCESS_EXPIRE_TIME,
     refresh_expire_time=settings.JWT_REFRESH_EXPIRE_TIME,
+    algorithm=settings.JWT_ALGORITHM,
 )

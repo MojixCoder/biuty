@@ -6,7 +6,7 @@ from async_asgi_testclient import TestClient
 
 from app.main import app
 from app.db.sql import metadata, test_database
-from app.core.settings import get_settings
+from app.core.settings import settings
 
 
 @pytest.fixture(scope="module")
@@ -16,7 +16,7 @@ def event_loop():
 
 @pytest.fixture(scope="module", autouse=True)
 def create_test_database():
-    engine = sqlalchemy.create_engine(get_settings().TEST_DATABASE_URL)
+    engine = sqlalchemy.create_engine(settings.TEST_DATABASE_URL)
     metadata.create_all(engine)
     yield
     metadata.drop_all(engine)

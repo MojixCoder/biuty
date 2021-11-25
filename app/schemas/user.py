@@ -4,10 +4,7 @@ from datetime import datetime
 from pydantic import BaseModel, validator, root_validator, Field
 
 from app.models.user import Role
-from app.core.settings import get_settings
-
-
-settings = get_settings()
+from app.core.settings import settings
 
 
 class UserSchema(BaseModel):
@@ -87,3 +84,18 @@ class RefreshSchema(BaseModel):
 
     access_token: str
     token_type: str
+
+
+class UserForeignKeySchema(BaseModel):
+    """
+    User foreign key schema
+    Serialize user responses as a foreign key
+    """
+
+    id: int
+    username: str
+    phone_number: str
+    name: str
+
+    class Config:
+        orm_mode = True

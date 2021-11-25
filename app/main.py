@@ -1,14 +1,22 @@
+import os
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 
 from app.apis.router import router
-from app.db.sql import database
+from app.core.settings import settings
+from app.db.sql import database, test_database
 
 
 app = FastAPI(title="Bonit")
-app.state.database = database
+
+
+if settings.TEST:
+    app.state.database = test_database
+else:
+    app.state.database = database
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 

@@ -1,7 +1,8 @@
+from typing import Dict, Any
+
 from fastapi import APIRouter, Depends, Body
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.core.settings import get_settings
 from app.core.exceptions import CONFLICT, BAD_REQUEST, UNAUTHORIZED, PERMISSION_DENIED
 from app.core.passwords import hash_password, verify_password
 from app.core.jwt import jwt_manager
@@ -10,7 +11,6 @@ from app.permissions.user import get_current_active_user
 from app.schemas.user import UserSchema, SignUpSchema, TokenSchema, RefreshSchema
 
 
-settings = get_settings()
 router = APIRouter(prefix="/users", tags=["user"])
 
 
@@ -112,5 +112,5 @@ async def refresh(refresh_token: str = Body(..., embed=True)):
         },
     },
 )
-async def me(user: User = Depends(get_current_active_user)):
+async def me(user: Dict[str, Any] = Depends(get_current_active_user)):
     return user

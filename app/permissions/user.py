@@ -2,7 +2,7 @@ from fastapi import Depends, Header
 
 from app.core.exceptions import UNAUTHORIZED, PERMISSION_DENIED
 from app.core.jwt import jwt_manager
-from app.models.user import User
+from app.models.user import User, Role
 from app.permissions.utils import get_token_from_header, get_or_set_user_in_cache
 
 
@@ -28,6 +28,17 @@ async def get_current_active_user(
     """
     Current active user
     """
-    if not current_user.is_active:
+    if not current_user["is_active"]:
         raise PERMISSION_DENIED
     return current_user
+
+
+async def admin_user(
+    user: User = Depends(get_current_active_user),
+) -> User:
+    """
+    Only admin users
+    """
+    if user["role"] == Role.admin:
+        return user
+    raise PERMISSION_DENIED

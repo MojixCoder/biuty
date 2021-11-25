@@ -1,5 +1,4 @@
 import os
-from functools import lru_cache
 from datetime import timedelta
 
 from pydantic import BaseSettings
@@ -12,6 +11,7 @@ class Settings(BaseSettings):
 
     # Application settings
     DEBUG: bool = os.getenv("DEBUG")
+    TEST: bool = os.getenv("DEBUG", False)
     SECRET_KEY: str = os.getenv("SECRET_KEY")
 
     # Database settings
@@ -41,6 +41,4 @@ class Settings(BaseSettings):
     USER_CACHE_KEY: str = "users"
 
 
-@lru_cache()
-def get_settings() -> Settings:
-    return Settings()
+settings = Settings()

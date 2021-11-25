@@ -45,8 +45,8 @@ class StoreBarbers(ormar.Model):
         Store, nullable=False, ondelete="CASCADE", related_name="store_barbers"
     )
     is_active: bool = ormar.Boolean(default=True)
-    joined_at: date = ormar.Date()
-    left_at: date = ormar.Date()
+    joined_at: date = ormar.Date(default=datetime.utcnow)
+    left_at: date = ormar.Date(nullable=True)
 
     class Meta(BaseMeta):
         tablename = "store_x_user"
